@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AddListForm from './AddListForm'
-import Buttons from './Buttons'
+import ActionButtons from './ActionButtons'
 
 const List = () => {
     const [tickets, addTicket] = useState([])
@@ -42,7 +42,7 @@ const List = () => {
             {tickets.length > 0 && tickets.map((item,index) => {
            return <li className='btn' key={item.id}>
                 <span>{item.value}</span>
-                    <Buttons 
+                    <ActionButtons 
                     item={item}
                     index={index}
                     tickets={tickets}
