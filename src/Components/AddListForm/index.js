@@ -17,7 +17,7 @@ const AddListForm = ({onSubmit}) => {
         <div>
             <form onSubmit={e => {
                 e.preventDefault();
-                onSubmit(Date.now(), text.value);
+                text.value.length > 0 && onSubmit(Date.now(), text.value);
                 resetValue()
                 }}>
                 <input className='btn' type='text' {...text} />
