@@ -21,7 +21,7 @@ const AddListForm = ({onSubmit}) => {
                 resetValue()
                 }}>
                 <input className='btn' type='text' {...text} />
-                <input className='btn' type='submit' value={'Add'}/>
+                <button className='btn' >Add</button>
             </form>
         </div>
     )
