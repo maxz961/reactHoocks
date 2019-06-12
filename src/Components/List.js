@@ -6,19 +6,22 @@ const List = () => {
     const [tickets, setTickets] = useState([])
    
     const listTicketUp = (idx) => {
-        const myElUP = tickets.slice(idx, idx + 1)
-        const myElDown = tickets.slice(idx - 1, idx)
-        const startTicketsList = tickets.slice(0, idx - 1)
-        const endTicketsList = tickets.slice(idx + 1, tickets.length)
-        setTickets([...new Set([...startTicketsList, myElUP[0], myElDown[0], ...endTicketsList])])
+
+      const newTickets = tickets.slice()
+        const tmp = newTickets[idx];
+        newTickets[idx] = newTickets[idx-1];
+        newTickets[idx-1] = tmp;
+        
+        setTickets(newTickets)
       }
     
       const listTicketDown = (idx) => {
-        const myTickDown = tickets.slice(idx, idx + 1)
-        const myTickUP = tickets.slice(idx + 1, idx + 2)
-        const newTicketsDown = tickets.slice(0, idx)
-        const endTicketsDown = tickets.slice(idx + 1, tickets.length)
-        setTickets([...new Set([...newTicketsDown, myTickUP[0], myTickDown[0], ...endTicketsDown])])
+        const newTickets = tickets.slice()
+        const tmp = newTickets[idx];
+        newTickets[idx] = newTickets[idx+1];
+        newTickets[idx+1] = tmp;
+        
+        setTickets(newTickets)
       }
 
       const removeTicket = (id) => {
