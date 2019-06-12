@@ -6,7 +6,6 @@ const List = () => {
     const [tickets, setTickets] = useState([])
    
     const listTicketUp = (idx) => {
-
       const newTickets = tickets.slice()
         const tmp = newTickets[idx];
         newTickets[idx] = newTickets[idx-1];
@@ -24,9 +23,7 @@ const List = () => {
         setTickets(newTickets)
       }
 
-      const removeTicket = (id) => {
-        setTickets(tickets.filter(item => item.id !== id))
-      }
+      const removeTicket = (id) => setTickets(tickets.filter(item => item.id !== id))
 
       const addSublist = (id) => {
         const newTicketsArray = tickets.map(ticket => {
@@ -63,9 +60,7 @@ const List = () => {
                     clickListTicketUp={() => listTicketUp(index, tickets)}
                     clickListTicketDown={() => listTicketDown(index, tickets)}
                     />            
-                { item.sublist ?
-                    <List />
-                : null }
+                { item.sublist && <List /> }
             </li>
             })
             }
