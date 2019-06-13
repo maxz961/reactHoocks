@@ -1,47 +1,26 @@
 import React, { useState } from 'react'
-import AddListForm from './AddListForm'
-import ActionButtons from './ActionButtons'
+import { AddListForm } from './AddListForm'
+import { ActionButtons } from './ActionButtons'
 
-const List = () => {
+export const List = () => {
     const [tickets, setTickets] = useState([])
    
-    const listTicketUp = (idx) => {
-      const newTickets = tickets.slice()
-        const tmp = newTickets[idx];
-        newTickets[idx] = newTickets[idx-1];
-        newTickets[idx-1] = tmp;
-        
-        setTickets(newTickets)
-      }
-    
-      const listTicketDown = (idx) => {
+      const listTicketDownOrUp = (idx, boolean) => {
         const newTickets = tickets.slice()
         const tmp = newTickets[idx];
-        newTickets[idx] = newTickets[idx+1];
-        newTickets[idx+1] = tmp;
+        newTickets[idx] = newTickets[boolean ? idx+1 : idx-1];
+        newTickets[boolean ? idx+1 : idx-1] = tmp;
         
         setTickets(newTickets)
       }
 
       const removeTicket = (id) => setTickets(tickets.filter(item => item.id !== id))
 
-      const addSublist = (id) => {
-        const newTicketsArray = tickets.map(ticket => {
-              if(ticket.id === id) {
-                return {...ticket, sublist: true}
-              }
-            return ticket
-          })
-        setTickets(newTicketsArray)
-      }
-
-      const removeSublist = (id) => {
-        const newTicketsArray = tickets.map(ticket => {
-              if(ticket.id === id) {
-                return {...ticket, sublist: false}
-              }
-            return ticket
-          })
+      const sublistButtonAction = (id, boolean) => {
+        const newTicketsArray = tickets.map(ticket => { 
+          if(ticket.id === id) return {...ticket, sublist: boolean}
+          return ticket 
+        })
         setTickets(newTicketsArray)
       }
 
@@ -55,10 +34,8 @@ const List = () => {
                     index={index}
                     tickets={tickets}
                     clickRemove={() => removeTicket(item.id)}
-                    clickRemoveSublist={() => removeSublist(item.id)}
-                    clickAddSublist={() => addSublist(item.id)} 
-                    clickListTicketUp={() => listTicketUp(index, tickets)}
-                    clickListTicketDown={() => listTicketDown(index, tickets)}
+                    clickSublistButtonAction={(boolean) => sublistButtonAction(item.id, boolean)} 
+                    clickListTicketDownOrUp={(boolean) => listTicketDownOrUp(index, boolean)}
                     />            
                 { item.sublist && <List /> }
             </li>
@@ -70,5 +47,3 @@ const List = () => {
         </ul>
     )
 }
-
-export default List;

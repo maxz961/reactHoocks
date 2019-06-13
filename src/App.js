@@ -1,9 +1,9 @@
 import React from 'react';
-import List from './Components/List'
+import { List } from './Components/List'
 
 import './App.css'
 
-const App = () => {
+export const App = () => {
   return (
     <div className='App'>
       <h1>A Nested List Editor</h1>
@@ -11,5 +11,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App;

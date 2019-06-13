@@ -1,18 +1,18 @@
 import React from 'react'
 
-const Buttons = ({item, index, tickets, clickRemove, clickRemoveSublist, clickAddSublist, clickListTicketUp, clickListTicketDown}) => {
+export const ActionButtons = ({item, index, tickets, clickRemove, clickSublistButtonAction, clickListTicketDownOrUp}) => {
     return (
         <React.Fragment>
-            {index !== 0 && <button className='btn' onClick={() => clickListTicketUp()}>
+            {index !== 0 && <button className='btn' onClick={() => clickListTicketDownOrUp(false)}>
                 ↑
             </button>}
-            {index !== tickets.length - 1 && <button className='btn' onClick={() => clickListTicketDown()}>
+            {index !== tickets.length - 1 && <button className='btn' onClick={() => clickListTicketDownOrUp(true)}>
                 ↓
             </button>}
             {
             item.sublist 
-            ? <button onClick={() => clickRemoveSublist()} className='btn'>Remove Sublist</button> 
-            : <button onClick={() => clickAddSublist()} className='btn'>Add Sublist</button>
+            ? <button onClick={() => clickSublistButtonAction(false)} className='btn'>Remove Sublist</button> 
+            : <button onClick={() => clickSublistButtonAction(true)} className='btn'>Add Sublist</button>
             }
             <button className='btn' onClick={() => clickRemove()}>
                 Remove
@@ -20,5 +20,3 @@ const Buttons = ({item, index, tickets, clickRemove, clickRemoveSublist, clickAd
         </React.Fragment>
     )
 }
-
-export default Buttons

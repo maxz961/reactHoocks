@@ -10,7 +10,7 @@ const useInputValue = initialValue => {
     }
 }
 
-const AddListForm = ({onSubmit}) => {
+export const AddListForm = ({onSubmit}) => {
     const {resetValue, ...text} = useInputValue('')
 
     return (
@@ -26,5 +26,3 @@ const AddListForm = ({onSubmit}) => {
         </div>
     )
 }
-
-export default AddListForm
